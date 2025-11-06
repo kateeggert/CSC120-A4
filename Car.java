@@ -1,17 +1,19 @@
 import java.util.ArrayList;
-
+/**
+ * Class for each car in the train, with passengers onboards and a capacity
+ */
 public class Car implements CarRequirements {
     // Attributes
-    private ArrayList<Passenger> PassengersOnboard;
-    private int Capacity;
+    private ArrayList<Passenger> passengersOnboard;
+    private int capacity;
 
     /**
      * Constructor
-     * @param Capacity
+     * @param capacity
      */
-    public Car(int Capacity) {
-        this.Capacity = Capacity;
-        this.PassengersOnboard = new ArrayList<>();
+    public Car(int capacity) {
+        this.capacity = capacity;
+        this.passengersOnboard = new ArrayList<>();
     }
 
     /**
@@ -19,7 +21,7 @@ public class Car implements CarRequirements {
      * @return Capacity
      */
     public int getCapacity() {
-        return Capacity;
+        return capacity;
     }
 
     /**
@@ -27,7 +29,7 @@ public class Car implements CarRequirements {
      * @return seats remaining
      */
     public int seatsRemaining() {
-        int seats = Capacity - PassengersOnboard.size();
+        int seats = capacity - passengersOnboard.size();
         return seats;
     }
 
@@ -37,12 +39,16 @@ public class Car implements CarRequirements {
      * @return boolean of whether the passenger was successfully added 
      */
     public Boolean addPassenger(Passenger p) {
-        // First checks to make sure there is space on the car, then adds the passenger
-        if (seatsRemaining() > 0) {
-            PassengersOnboard.add(p);
-            return true;
-        } else {
+        // First checks to make sure there is space on the car
+        if (seatsRemaining() == 0) {
             return false;
+        // Makes sure passenger isn't already on board
+        } if(passengersOnboard.contains(p)) {
+            return false;
+        // Boards the passenger
+        } else {
+            passengersOnboard.add(p);
+            return true;
         }
     }
 
@@ -53,8 +59,8 @@ public class Car implements CarRequirements {
      */
     public Boolean removePassenger(Passenger p) {
         // First checks to make sure the passenger is already onboard
-        if (PassengersOnboard.contains(p)) {
-            PassengersOnboard.remove(p);
+        if (passengersOnboard.contains(p)) {
+            passengersOnboard.remove(p);
             return true;
         } else {
             return false;
@@ -65,11 +71,12 @@ public class Car implements CarRequirements {
      * Prints manifest of all passengers on board
      */
     public void printManifest() {
-        if (PassengersOnboard.size() == 0) {
+        // checks if the car is empty
+        if (passengersOnboard.size() == 0) {
             System.out.println("This car is EMPTY.");
         } else {
             System.out.println("This car's manifest is:");
-            for (Passenger p : PassengersOnboard) {
+            for (Passenger p : passengersOnboard) {
                 System.out.println(p.getName());
             }
         }

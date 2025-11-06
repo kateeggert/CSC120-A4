@@ -1,35 +1,29 @@
 import java.util.ArrayList;
-
+/**
+ * Class that combines the other classes to run a train
+ */
 public class Train implements TrainRequirements {
     // Attributes
-    private FuelType fuelType; 
-    private double currentFuelLevel;
-    private double fuelCapacity;
     private int nCars;
-    private int passengerCapacity;
     private ArrayList<Car> totalCars;
     private Engine myEngine;
 
     /**
      * Constructor
-     * @param fuelType
-     * @param currentFuelLevel
-     * @param fuelCapacity
+     * @param fuelType type of fuel
+     * @param currentFuelLevel current level of fuel
+     * @param fuelCapacity max fuel
      * @param nCars number of desired cars
      * @param passengerCapacity capacity per car
      */
     public Train (FuelType fuelType, double currentFuelLevel, double fuelCapacity, int nCars, int passengerCapacity) {
-        this.fuelType = fuelType;
-        this.currentFuelLevel = currentFuelLevel;
-        this.fuelCapacity = fuelCapacity;
         this.nCars = nCars;
-        this.passengerCapacity = passengerCapacity;
         this.totalCars = new ArrayList<>();
-        this.myEngine = new Engine(this.fuelType, this.currentFuelLevel, this.fuelCapacity);
+        this.myEngine = new Engine(fuelType, currentFuelLevel, fuelCapacity);
 
         // Creates an instance of a car for the number of cars the user inputs
         for (int i = 0; i < this.nCars; i++) {
-            Car car = new Car(this.passengerCapacity);
+            Car car = new Car(passengerCapacity);
             totalCars.add(car);
         }
     }
@@ -56,13 +50,13 @@ public class Train implements TrainRequirements {
      * @return total maximum capacity
      */
     public int getMaxCapacity() {
-        int TotalMaxCapacity = 0;
+        int totalMaxCapacity = 0;
         // for each car in the train, adds the car capacity to find the total capacity
         for (int i = 0; i < this.totalCars.size(); i++){
             Car car = this.totalCars.get(i);
-            TotalMaxCapacity += car.getCapacity();
+            totalMaxCapacity += car.getCapacity();
         }
-        return TotalMaxCapacity;
+        return totalMaxCapacity;
     }
 
     /**
@@ -70,13 +64,13 @@ public class Train implements TrainRequirements {
      * @return total seats remaining
      */
     public int seatsRemaining() {
-        int TotalSeatsRemaining = 0;
+        int totalSeatsRemaining = 0;
         // for each car in the train, adds the seats remaining in the car to find total seats remaining
         for (int i = 0; i < this.totalCars.size(); i++){
             Car car = this.totalCars.get(i);
-            TotalSeatsRemaining += car.seatsRemaining();
+            totalSeatsRemaining += car.seatsRemaining();
         }
-        return TotalSeatsRemaining;
+        return totalSeatsRemaining;
     }
 
     /** 
@@ -98,10 +92,13 @@ public class Train implements TrainRequirements {
         Car myCar = myTrain.getCar(0);
         System.out.println("Seats remaining is: " + myCar.seatsRemaining());
         myCar.addPassenger(Kate);
+        System.out.println("Seats remaining is: " + myCar.seatsRemaining());
         Passenger Naomi = new Passenger("Naomi");
         myCar.addPassenger(Naomi);
         System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        myTrain.printManifest();
+        myCar.addPassenger(Naomi);
+        System.out.println("Seats remaining is: " + myCar.seatsRemaining());
+        // myTrain.printManifest();
     }
 }
 

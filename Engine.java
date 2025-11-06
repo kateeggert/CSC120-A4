@@ -1,23 +1,27 @@
+/**
+ * Class for the engine for the train, with a fuel type, current fuel level, and max fuel level
+ */
+
 public class Engine implements EngineRequirements {
     // Attributes
     private FuelType fuelType;
-    private double CurrentFuel;
-    private double MaxFuel;
+    private double currentFuel;
+    private double maxFuel;
 
     /**
      * Constructor
      * @param fuelType
-     * @param CurrentFuel
-     * @param MaxFuel
+     * @param currentFuel
+     * @param maxFuel
      */
-    public Engine (FuelType fuelType, double CurrentFuel, double MaxFuel) {
+    public Engine (FuelType fuelType, double currentFuel, double maxFuel) {
         this.fuelType = fuelType;
-        this.CurrentFuel = CurrentFuel;
-        this.MaxFuel = MaxFuel;
+        this.currentFuel = currentFuel;
+        this.maxFuel = maxFuel;
     }
 
     /**
-     * Fuel type getter
+     * Getter for fuel type
      * @return fuel type
      */
     public FuelType getFuelType() {
@@ -29,7 +33,7 @@ public class Engine implements EngineRequirements {
      * @return max fuel
      */
     public double getMaxFuel() {
-        return this.MaxFuel;
+        return this.maxFuel;
     }
 
     /** 
@@ -37,14 +41,14 @@ public class Engine implements EngineRequirements {
      * @return current fuel level
      */
     public double getCurrentFuel() {
-        return this.CurrentFuel;
+        return this.currentFuel;
     }
 
     /**
      * Refuels the current fuel all the way up (to max fuel level)
      */
     public void refuel() {
-        this.CurrentFuel = this.MaxFuel;
+        this.currentFuel = this.maxFuel;
     }
 
     /** 
@@ -53,8 +57,8 @@ public class Engine implements EngineRequirements {
      */
     public Boolean go() {
         // Makes sure the fuel won't go negative
-        if (CurrentFuel > 10) {
-            CurrentFuel -= 10;
+        if (currentFuel >= 10) {
+            currentFuel -= 10;
             return true;
         }
         else {
