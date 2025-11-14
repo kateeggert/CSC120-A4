@@ -15,8 +15,8 @@ public class Passenger implements PassengerRequirements {
      * @param c car
      */
     public void boardCar(Car c) {
-        if (c.addPassenger(this)) {
-            c.addPassenger(this);
+        if (c.addPassenger(this) == false) {
+            System.out.println("Boarding was unsuccessful. Car is full or passenger has already boarded");
         }
     }
 
@@ -25,8 +25,8 @@ public class Passenger implements PassengerRequirements {
      * @param c car
      */
     public void getOffCar(Car c) {
-        if (c.removePassenger(this)) {
-            c.removePassenger(this);
+        if (c.removePassenger(this) == false) {
+            System.out.println("Exiting was unsuccessful. Passenger is not on board");
         }
     }
 

@@ -60,8 +60,7 @@ public class Engine implements EngineRequirements {
         if (currentFuel >= 10) {
             currentFuel -= 10;
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

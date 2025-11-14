@@ -42,11 +42,12 @@ public class Car implements CarRequirements {
         // First checks to make sure there is space on the car
         if (seatsRemaining() == 0) {
             return false;
+        } 
         // Makes sure passenger isn't already on board
-        } if(passengersOnboard.contains(p)) {
+        if(passengersOnboard.contains(p)) {
             return false;
-        // Boards the passenger
         } else {
+            // Boards the passenger
             passengersOnboard.add(p);
             return true;
         }
@@ -86,11 +87,8 @@ public class Car implements CarRequirements {
         Car myCar = new Car(20);
         System.out.println("Car capacity is: " + myCar.getCapacity());
         System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        Passenger Kate = new Passenger("Kate");
-        myCar.addPassenger(Kate);
-        Passenger Naomi = new Passenger("Naomi");
-        myCar.addPassenger(Naomi);
-        System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        myCar.printManifest();
+        Passenger mia = new Passenger("Mia");
+        System.out.println(myCar.addPassenger(mia));
+        System.out.println(myCar.addPassenger(mia));
     }
 }

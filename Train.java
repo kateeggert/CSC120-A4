@@ -4,7 +4,7 @@ import java.util.ArrayList;
  */
 public class Train implements TrainRequirements {
     // Attributes
-    private int nCars;
+
     private ArrayList<Car> totalCars;
     private Engine myEngine;
 
@@ -17,12 +17,11 @@ public class Train implements TrainRequirements {
      * @param passengerCapacity capacity per car
      */
     public Train (FuelType fuelType, double currentFuelLevel, double fuelCapacity, int nCars, int passengerCapacity) {
-        this.nCars = nCars;
         this.totalCars = new ArrayList<>();
         this.myEngine = new Engine(fuelType, currentFuelLevel, fuelCapacity);
 
         // Creates an instance of a car for the number of cars the user inputs
-        for (int i = 0; i < this.nCars; i++) {
+        for (int i = 0; i < nCars; i++) {
             Car car = new Car(passengerCapacity);
             totalCars.add(car);
         }
@@ -52,10 +51,10 @@ public class Train implements TrainRequirements {
     public int getMaxCapacity() {
         int totalMaxCapacity = 0;
         // for each car in the train, adds the car capacity to find the total capacity
-        for (int i = 0; i < this.totalCars.size(); i++){
+        for (int i = 0; i < this.totalCars.size(); i++) {
             Car car = this.totalCars.get(i);
             totalMaxCapacity += car.getCapacity();
-        }
+        } 
         return totalMaxCapacity;
     }
 
@@ -69,7 +68,7 @@ public class Train implements TrainRequirements {
         for (int i = 0; i < this.totalCars.size(); i++){
             Car car = this.totalCars.get(i);
             totalSeatsRemaining += car.seatsRemaining();
-        }
+        } 
         return totalSeatsRemaining;
     }
 
@@ -86,19 +85,15 @@ public class Train implements TrainRequirements {
 
     public static void main(String[] args) {
         Train myTrain = new Train(FuelType.ELECTRIC, 100, 1000, 4, 20);
-        System.out.println("Car capacity is:" + myTrain.getMaxCapacity());
-        System.out.println("Seats remaining is: " + myTrain.seatsRemaining());
-        Passenger Kate = new Passenger("Kate");
+        Passenger sarina = new Passenger("Sarina");
         Car myCar = myTrain.getCar(0);
         System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        myCar.addPassenger(Kate);
+        sarina.boardCar(myCar);
         System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        Passenger Naomi = new Passenger("Naomi");
-        myCar.addPassenger(Naomi);
+        sarina.boardCar(myCar);
         System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        myCar.addPassenger(Naomi);
-        System.out.println("Seats remaining is: " + myCar.seatsRemaining());
-        // myTrain.printManifest();
+        sarina.getOffCar(myCar);
+        sarina.getOffCar(myCar);
     }
 }
 
